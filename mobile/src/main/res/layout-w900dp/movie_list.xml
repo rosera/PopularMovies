@@ -1,0 +1,48 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:layout_marginLeft="16dp"
+              android:layout_marginRight="16dp"
+              android:baselineAligned="false"
+              android:divider="?android:attr/dividerHorizontal"
+              android:orientation="horizontal"
+              android:showDividers="middle"
+              tools:context="com.technologynorth.rosera.popmoviess2.MovieListActivity">
+
+    <!--
+    This layout is a two-pane layout for the Movies
+    master/detail flow.
+    
+    -->
+
+    <GridView xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:id="@+id/movie_list"
+              android:name="com.technologynorth.rosera.popmoviess2.MovieListFragment"
+              android:layout_width="0dp"
+              android:layout_height="match_parent"
+
+              android:numColumns="auto_fit"
+              android:columnWidth="125dp"
+              android:stretchMode="columnWidth"
+              android:verticalSpacing="5dp"
+              android:horizontalSpacing="0dp"
+              android:clickable="true"
+
+              android:layout_marginLeft="0dp"
+              android:layout_marginRight="5dp"
+              tools:context="com.technologynorth.rosera.popmoviess2.MovieListActivity"
+              tools:listitem="@layout/movie_list_content"
+              android:layout_weight="2"
+              android:layout_marginTop="10dp"
+              android:layout_marginBottom="10dp"/>
+
+    <FrameLayout
+        android:id="@+id/movie_detail_container"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="3"/>
+
+</LinearLayout>

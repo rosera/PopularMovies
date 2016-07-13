@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- Add attributes for GridView -->
+<GridView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/movie_list"
+        android:name="com.technologynorth.rosera.popmoviess2.MovieListFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+          android:numColumns="auto_fit"
+          android:columnWidth="125dp"
+          android:stretchMode="columnWidth"
+          android:verticalSpacing="5dp"
+          android:horizontalSpacing="0dp"
+          android:clickable="true"
+
+        android:layout_marginLeft="2dp"
+        android:layout_marginRight="2dp"
+        app:layoutManager="LinearLayoutManager"
+        tools:context="com.technologynorth.rosera.popmoviess2.MovieListActivity"
+        tools:listitem="@layout/movie_list_content"/>

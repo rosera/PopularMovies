@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">PopMoviesS2</string>
+    <string name="title_movie_detail">Movie Detail</string>
+    <string name="film_poster">Film Poster</string>
+    <string name="title_release">Release</string>
+    <string name="title_rating">Rating</string>
+    <string name="title_movie">Title</string>
+    <string name="title_review">Review</string>
+    <string name="title_similar">Similar genre</string>
+    <string name="string_lorum">Lorem ipsum dolor sit amet, odio lectus, cum pede amet luctus, vel sit a litora, convallis lacus ipsum non id. Hendrerit placeat ante purus ultricies vestibulum, libero risus fermentum auctor quam, leo ut tortor, sapien tristique ac, suspendisse proin duis. Nisl ipsum a ut lacus, vulputate nonummy. Duis blandit lorem orci et risus facilisis, mauris sed hac, scelerisque donec molestie vel non. A montes tempor, dapibus suspendisse felis.</string>
+    <string name="lorem_ipsum_short">Lorem ipsum</string>
+</resources>

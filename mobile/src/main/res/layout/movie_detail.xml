@@ -1,0 +1,281 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
+        <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+                                            xmlns:tools="http://schemas.android.com/tools"
+                                            xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                                            tools:context="com.technologynorth.rosera.popmoviess2.MovieDetailFragment"
+                                            android:id="@+id/card_view"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_margin="10dp"
+                                            card_view:cardElevation="4dp"
+                                            card_view:cardCornerRadius="4dp"
+                                            android:nestedScrollingEnabled="false">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp">
+
+                <ImageView
+                    android:id="@+id/imageViewPoster"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:contentDescription="Film poster"
+                    android:layout_marginRight="16dp"
+                    android:padding="5dp"
+                    android:minHeight="200dp"
+                    android:minWidth="75dp"/>
+
+                <TextView
+                    android:id="@+id/tvRelease"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="@string/title_release"
+                    android:textStyle="bold"
+                    android:layout_alignParentTop="true"
+                    android:layout_toRightOf="@id/imageViewPoster"/>
+
+                <TextView
+                    android:id="@+id/textViewYear"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/lorem_ipsum_short"
+                    android:layout_below="@id/tvRelease"
+                    android:layout_toRightOf="@id/imageViewPoster"
+                    android:paddingLeft="5dp"/>
+
+                <TextView
+                    android:id="@+id/tvRating"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:text="@string/title_rating"
+                    android:textStyle="bold"
+                    android:layout_below="@id/textViewYear"
+                    android:layout_toRightOf="@id/imageViewPoster"
+                    android:paddingTop="10dp"/>
+
+                <TextView
+                    android:id="@+id/textViewRating"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/lorem_ipsum_short"
+                    android:layout_below="@id/tvRating"
+                    android:layout_toRightOf="@id/imageViewPoster"
+                    android:paddingLeft="5dp"
+                    android:paddingBottom="20dp"/>
+
+
+                <TextView
+                    android:id="@+id/textViewTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/title_movie"
+                    android:layout_below="@id/imageViewPoster"
+                    android:textStyle="bold"
+                    android:paddingLeft="5dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/lorem_ipsum_short"
+                    android:paddingLeft="5dp"
+                    android:layout_below="@id/textViewTitle"
+                    android:id="@+id/tvRuntime"/>
+
+
+
+                <TextView
+                    android:layout_below="@id/tvRuntime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/string_lorum"
+                    android:id="@+id/textViewOverview"
+
+                    android:padding="5dp"/>
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Trailer - 1"
+                    android:layout_below="@id/textViewOverview"
+                    android:paddingLeft="5dp"
+                    style="?android:attr/borderlessButtonStyle"
+                    android:id="@+id/btnTrailer1"/>
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Trailer - 2"
+                    android:layout_below="@id/textViewOverview"
+                    android:layout_toRightOf="@id/btnTrailer1"
+                    style="?android:attr/borderlessButtonStyle"
+                    android:id="@+id/btnTrailer2"/>
+
+            </RelativeLayout>
+
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+                                            xmlns:tools="http://schemas.android.com/tools"
+                                            xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                                            tools:context="com.technologynorth.rosera.popmoviess2.MovieDetailFragment"
+                                            android:id="@+id/card_view2"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_margin="10dp"
+                                            card_view:cardElevation="4dp"
+                                            card_view:cardCornerRadius="4dp"
+                                            android:nestedScrollingEnabled="false"
+                                            android:layout_weight="0.10"
+            >
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/title_review"
+                    android:paddingLeft="5dp"
+                    android:layout_marginBottom="10dp"
+                    android:id="@+id/tvHeader"
+                    android:textStyle="bold"
+                    android:paddingRight="5dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="1/1"
+                    android:paddingLeft="230dp"
+                    android:layout_marginBottom="10dp"
+                    android:id="@+id/tvReviewArticles"
+                    android:textStyle="bold"
+                    android:layout_toRightOf="@id/tvHeader"
+                    android:paddingRight="5dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/string_lorum"
+                    android:id="@+id/tvReview"
+                    android:paddingLeft="5dp"
+                    android:minLines="5"
+                    android:paddingBottom="5dp"
+                    android:paddingRight="5dp"
+                    android:layout_below="@+id/tvHeader"
+                    android:nestedScrollingEnabled="true"/>
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Previous"
+                    android:layout_below="@id/tvReview"
+                    android:paddingLeft="5dp"
+                    style="?android:attr/borderlessButtonStyle"
+                    android:id="@+id/btnReviewPrevious"/>
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Next"
+                    android:layout_below="@id/tvReview"
+                    android:layout_toRightOf="@id/btnReviewPrevious"
+                    style="?android:attr/borderlessButtonStyle"
+                    android:id="@+id/btnReviewNext"/>
+
+            </RelativeLayout>
+
+        </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+                                        xmlns:tools="http://schemas.android.com/tools"
+                                        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                                        tools:context="com.technologynorth.rosera.popmoviess2.MovieDetailFragment"
+                                        android:id="@+id/card_view3"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_margin="10dp"
+                                        card_view:cardElevation="4dp"
+                                        card_view:cardCornerRadius="4dp"
+                                        android:nestedScrollingEnabled="false"
+                                        android:layout_weight="0.10"
+        >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            >
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/title_similar"
+                android:paddingLeft="5dp"
+                android:layout_marginBottom="10dp"
+                android:id="@+id/tvHeader2"
+                android:textStyle="bold"
+                android:paddingRight="5dp"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/imageViewMinPoster1"
+                android:minHeight="100dp"
+                android:minWidth="35dp"
+                android:layout_below="@id/tvHeader2"
+                android:paddingLeft="5dp"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/imageViewMinPoster2"
+                android:minHeight="100dp"
+                android:minWidth="35dp"
+                android:layout_below="@id/tvHeader2"
+                android:layout_toRightOf="@id/imageViewMinPoster1"
+                android:paddingLeft="20dp"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/imageViewMinPoster3"
+                android:minHeight="100dp"
+                android:minWidth="35dp"
+                android:layout_below="@id/tvHeader2"
+                android:layout_toRightOf="@id/imageViewMinPoster2"
+                android:paddingLeft="20dp"/>
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/imageViewMinPoster4"
+                android:minHeight="100dp"
+                android:minWidth="35dp"
+                android:layout_below="@id/tvHeader2"
+                android:layout_toRightOf="@id/imageViewMinPoster3"
+                android:paddingLeft="20dp"/>
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.CardView>
+
+
+</LinearLayout>
+
+</ScrollView>
