@@ -1,5 +1,5 @@
 # PopularMovies
-Popular Movies - Udacity Android Developer Nanodegree
+Popular Movies - P1 & P2 Udacity Android Developer Nanodegree
 
 ## Synopsis
 Popular Movies provides an interface for the TMDB movie API. The information covers stages 1 & 2 of the implementation guide.
