@@ -16,7 +16,9 @@ public class Film implements Parcelable {
     String mTitle;
     String mYear;
     String mTrailerPrimaryUri;
+    String mTrailerPrimaryThumbnail;
     String mTrailerSecondaryUri;
+    String mTrailerSecondaryThumbnail;
     String mThumbnail;
     String mOverview;
     String mRating;

@@ -5,42 +5,30 @@ import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.graphics.drawable.DrawerArrowDrawable;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.util.DisplayMetrics;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.GridView;
-import android.widget.TextView;
 import android.widget.Toast;
-
 
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.technologynorth.rosera.popmoviess2.dummy.DummyContent;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * An activity representing a list of Movies. This activity
@@ -325,6 +313,8 @@ public class MovieListActivity extends AppCompatActivity {
                             // TODO: Get the response array
                             JSONArray jsonArray = response.getJSONArray("results");
                             String id;
+                            String title;
+                            double  rating;
                             String poster_uri;
 
                             // TODO: Clear existing information
@@ -337,11 +327,13 @@ public class MovieListActivity extends AppCompatActivity {
 
                                 // Get the required details: ID + poster_path
                                 id = movie.getString("id");
+                                title = movie.getString("title");
+                                rating = movie.getDouble("vote_average");
                                 poster_uri = movie.getString("poster_path");
 
                                 // TODO: Add to movie structure
                                 mPosterInformation.add(new Poster(id,
-                                        MOVIE_IMAGE_URI+mScreenDensity+poster_uri));
+                                        MOVIE_IMAGE_URI+mScreenDensity+poster_uri, title, rating));
                             }
 
                             // TODO: Notify a data set change

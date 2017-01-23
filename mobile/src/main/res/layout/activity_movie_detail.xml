@@ -49,6 +49,23 @@
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
 
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageViewPoster"
+        android:paddingLeft="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="0dp"
+        android:paddingTop="5dp"
+        android:paddingBottom="10dp"
+        android:maxHeight="175dp"
+        android:maxWidth="100dp"
+        app:layout_anchor="@+id/movie_detail_container"
+        app:layout_anchorGravity="top|start"
+        android:elevation="4dp"
+        android:adjustViewBounds="true"
+        android:scaleType="fitXY" />
+
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"
         android:layout_width="wrap_content"

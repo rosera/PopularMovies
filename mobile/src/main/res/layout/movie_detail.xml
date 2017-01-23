@@ -22,25 +22,14 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="10dp">
-
-                <ImageView
-                    android:id="@+id/imageViewPoster"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentLeft="true"
-                    android:layout_alignParentTop="true"
-                    android:contentDescription="Film poster"
-                    android:layout_marginRight="16dp"
-                    android:padding="5dp"
-                    android:minHeight="200dp"
-                    android:minWidth="75dp"/>
+                android:paddingBottom="5dp">
 
                 <TextView
                     android:id="@+id/tvRelease"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceSmall"
+
                     android:text="@string/title_release"
                     android:textStyle="bold"
                     android:layout_alignParentTop="true"
@@ -51,8 +40,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/lorem_ipsum_short"
-                    android:layout_below="@id/tvRelease"
-                    android:layout_toRightOf="@id/imageViewPoster"
+                    android:layout_alignRight="@id/tvRelease"
                     android:paddingLeft="5dp"/>
 
                 <TextView
@@ -63,7 +51,6 @@
                     android:text="@string/title_rating"
                     android:textStyle="bold"
                     android:layout_below="@id/textViewYear"
-                    android:layout_toRightOf="@id/imageViewPoster"
                     android:paddingTop="10dp"/>
 
                 <TextView
@@ -71,19 +58,17 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/lorem_ipsum_short"
-                    android:layout_below="@id/tvRating"
-                    android:layout_toRightOf="@id/imageViewPoster"
+                    android:layout_alignRight="@id/tvRating"
                     android:paddingLeft="5dp"
                     android:paddingBottom="20dp"/>
-
 
                 <TextView
                     android:id="@+id/textViewTitle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/title_movie"
-                    android:layout_below="@id/imageViewPoster"
                     android:textStyle="bold"
+                    android:layout_below="@id/tvRating"
                     android:paddingLeft="5dp"/>
 
                 <TextView
@@ -93,8 +78,6 @@
                     android:paddingLeft="5dp"
                     android:layout_below="@id/textViewTitle"
                     android:id="@+id/tvRuntime"/>
-
-
 
                 <TextView
                     android:layout_below="@id/tvRuntime"
@@ -122,6 +105,25 @@
                     android:layout_toRightOf="@id/btnTrailer1"
                     style="?android:attr/borderlessButtonStyle"
                     android:id="@+id/btnTrailer2"/>
+
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/btnTrailer1"
+                    android:id="@+id/YouTubeTrailer1"
+                    android:minHeight="150dp"
+                    android:minWidth="75dp"/>
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/YouTubeTrailer1"
+                    android:layout_alignRight="@id/btnTrailer1"
+                    android:id="@+id/YouTubeTrailer2"
+                    android:minHeight="150dp"
+                    android:minWidth="75dp"/>
+
 
             </RelativeLayout>
 

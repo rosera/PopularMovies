@@ -13,15 +13,19 @@ public class Poster implements Parcelable {
     // TODO: Add member variables
     String mID;
     String mThumbnail;
+    String mTitle;
+    double mRating;
 
 
     /*
      * Name: Poster
      * Comment: Constructor
      */
-    public Poster(String strID, String strThumbnail) {
-        this.mID                = strID;
-        this.mThumbnail         = strThumbnail;
+    public Poster(String strID, String strThumbnail, String strTitle, double dRating) {
+        this.mID            = strID;
+        this.mThumbnail     = strThumbnail;
+        this.mTitle         = strTitle;
+        this.mRating        = dRating;
     }
 
     // TODO: Add the getter methods
@@ -41,10 +45,17 @@ public class Poster implements Parcelable {
     }
 
 
+    public String getTitle() { return mTitle; }
+
+    public double getRating() { return mRating; }
+
+
     // TODO: Add parcelable methods
     private Poster(Parcel in) {
         this.mID                = in.readString();
         this.mThumbnail         = in.readString();
+        this.mTitle             = in.readString();
+        this.mRating            = in.readDouble();
     }
 
     /*
@@ -59,6 +70,8 @@ public class Poster implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(this.mID);
         dest.writeString(this.mThumbnail);
+        dest.writeString(this.mTitle);
+        dest.writeDouble(this.mRating);
     }
 
     public final Parcelable.Creator<Poster> CREATOR = new Parcelable.Creator<Poster>() {

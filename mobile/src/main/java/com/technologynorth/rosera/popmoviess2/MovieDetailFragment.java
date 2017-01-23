@@ -1,17 +1,10 @@
 package com.technologynorth.rosera.popmoviess2;
 
-import android.app.Activity;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.net.Uri;
-import android.support.design.widget.CollapsingToolbarLayout;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.ActionBarActivity;
-import android.support.v7.widget.Toolbar;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -32,8 +25,9 @@ import com.technologynorth.rosera.popmoviess2.dummy.DummyContent;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.w3c.dom.Text;
 
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 
 /**
@@ -316,10 +310,8 @@ public class MovieDetailFragment extends Fragment {
                             mThumbnail = MOVIE_IMAGE_URI + getScreenDensity() + response.getString("poster_path");
                             mRating = response.getString("vote_average") + "/10";
 
-
                             for (int i=0; i<jsonArray.length(); i++) {
                                 JSONObject video = jsonArray.getJSONObject(i);
-
 
                                 switch(i) {
                                     case 0:
@@ -465,9 +457,6 @@ public class MovieDetailFragment extends Fragment {
     }
 
 
-
-
-
     private void onRequestMovieSimilar(String mID, int searchType) {
         // TODO: Stage 2: mFilmAPI Query
         final String MOVIE_API_URI = "http://api.themoviedb.org/3/movie/" ;
@@ -585,11 +574,11 @@ public class MovieDetailFragment extends Fragment {
 //            rootView = this.getView();
 //        }
 
-        ImageView imageViewThumbnail = (ImageView) rootView.findViewById(R.id.imageViewPoster);
-        // TODO: Use Picasso to fetch and load images into the ImageView
-        Picasso.with(getActivity())
-                .load(mThumbnail)
-                .into(imageViewThumbnail);
+//        ImageView imageViewThumbnail = (ImageView) rootView.findViewById(R.id.imageViewPoster);
+//        // TODO: Use Picasso to fetch and load images into the ImageView
+//        Picasso.with(getActivity())
+//                .load(mThumbnail)
+//                .into(imageViewThumbnail);
 
         // TODO: Get reference to the UI controls
         TextView tvTitle = (TextView) rootView.findViewById(R.id.textViewTitle);
@@ -606,6 +595,8 @@ public class MovieDetailFragment extends Fragment {
 
         TextView tvRuntime = (TextView) rootView.findViewById(R.id.tvRuntime);
         tvRuntime.setText(mRuntime);
+
+        // TODO: Remove buttons and replace with RecyclerView
 
         // TODO: Only show the trailer buttons if videos found
         Button btnTrailer1 = (Button) rootView.findViewById(R.id.btnTrailer1);
@@ -625,7 +616,75 @@ public class MovieDetailFragment extends Fragment {
             btnTrailer2.setText(mTrailer2_name);
             btnTrailer2.setVisibility(View.VISIBLE);
         }
+
+
+        /*
+         * TODO: Interface change add YouTube images (Recycler) rather than buttons
+         * Add a YouTube image
+         */
+
+        if (mTrailer1.length()!=0) {
+            String strThumbnail;
+
+            try {
+                strThumbnail = extractYouTubeId(mTrailer1);
+
+                ImageView ivThumbnail = (ImageView) rootView.findViewById(R.id.YouTubeTrailer1);
+
+                // Load the thumbnail from Youtube
+                Picasso.with(getActivity())
+                        .load("http://img.youtube.com/vi/" + strThumbnail + "/0.jpg")
+                        .into(ivThumbnail);
+
+            }  catch (MalformedURLException ex) {
+                ex.printStackTrace();
+            }
+        }
+
+        if (mTrailer2.length()!=0) {
+            String strThumbnail2;
+
+            try {
+                strThumbnail2 = extractYouTubeId(mTrailer2);
+
+                ImageView ivThumbnail2 = (ImageView) rootView.findViewById(R.id.YouTubeTrailer2);
+
+                // Load the thumbnail from Youtube
+                Picasso.with(getActivity())
+                        .load("http://img.youtube.com/vi/" + strThumbnail2 + "/0.jpg")
+                        .into(ivThumbnail2);
+
+            } catch (MalformedURLException ex) {
+                ex.printStackTrace();
+            }
+
+        }
+
     }
+
+
+    /*
+     * Utility function
+     * Name: extractYouTubeId
+     * Description: Get the id from the YouTube URI
+     *
+     */
+
+    public String extractYouTubeId(String url) throws MalformedURLException {
+        String query = new URL(url).getQuery();
+        String[] param = query.split("&");
+        String id = null;
+        for (String row : param) {
+            String[] param1 = row.split("=");
+            if (param1[0].equals("v")) {
+                id = param1[1];
+            }
+        }
+        return id;
+    }
+
+
+
 
     /*
      * Use an intent to initiate Youtube via Browser or App
@@ -766,6 +825,9 @@ public class MovieDetailFragment extends Fragment {
                     .load(mMinPoster4)
                     .into(imageViewPoster4);
         }
+
+
+
     }
 
 }
