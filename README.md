@@ -26,6 +26,9 @@ Libraries
 
 The project requires the Volley library and a valid TMDB API key to compile and run. Load Volley into the project directory. An empty folder marked Volley is the one in which the Volley project should be loaded.
 
+Note: 
+Volley has now been moved to the following location: https://github.com/google/volley
+A valid TMDB API key can be accessed via the TMDB website.
 
 ## Acknowledgments
 
