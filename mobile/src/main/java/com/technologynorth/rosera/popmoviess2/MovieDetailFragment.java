@@ -5,12 +5,17 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -51,7 +56,12 @@ public class MovieDetailFragment extends Fragment {
 
     private static View rootView;
 
-    private ArrayList<Film> mFilmInformation    = null;
+    private ArrayList<Film> mFilmInformation        = null;
+    private ArrayList<Media> mTrailerInformation    = null;
+    private ArrayList<Media> mSimilarInformation    = null;
+
+    private MediaListAdapter    mTrailerAdapter = null;
+    private RecyclerView        mTrailerRecyclerView = null;
 
     // TODO: Do this initialisation in a method
     private String mID          = "";
@@ -113,8 +123,6 @@ public class MovieDetailFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
-
         if (getArguments().containsKey(ARG_ITEM_ID)) {
             mID = getArguments().getString(ARG_ITEM_ID);
         }
@@ -127,45 +135,61 @@ public class MovieDetailFragment extends Fragment {
         if (mFilmInformation == null)
             mFilmInformation = new ArrayList<>();
 
+        if (mTrailerInformation == null)
+            mTrailerInformation = new ArrayList<Media>();
+
+        if (mSimilarInformation == null)
+            mSimilarInformation = new ArrayList<Media>();
+
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-//        rootView = inflater.inflate(R.layout.movie_detail, container, false);
         rootView = inflater.inflate(R.layout.movie_detail, container, false);
 
+        // TODO: Horizontal RecyclerView - Trailers from YouTube
+        mTrailerRecyclerView = (RecyclerView) rootView.findViewById(R.id.YouTubeTrailer);
 
-//        View view = getActivity().setContentView(R.layout.activity_movie_detail);
-//        view = getActivity().getView();
-//        FloatingActionButton fab = (FloatingActionButton) rootView.findViewById(R.id.fab_test);
-//        fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Snackbar.make(view, "Replace with your own detail action", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
-//            }
-//        });
+        LinearLayoutManager linearLayoutManager =
+                new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
+
+        mTrailerRecyclerView.setLayoutManager(linearLayoutManager);
+
+        // TODO: Need recycler adapter
+        mTrailerAdapter = new MediaListAdapter(mTrailerInformation,
+                                    R.layout.recycler_media_item,
+                                    getActivity());
+
+//        mTrailerRecyclerView.setAdapter(mTrailerAdapter);
+
+
+        // TODO: Add a listener to the RecyclerView
+
+        // TODO Horizontal RecyclerView - Similar moves list
+
+
 
         // TODO: Add listener for buttons
-        Button btnTrailer1 = (Button) rootView.findViewById(R.id.btnTrailer1);
-        btnTrailer1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // TODO: Play Youtube trailer
-                YouTubeTrailer(mTrailer1);
-            }
-        });
-
-        Button btnTrailer2 = (Button) rootView.findViewById(R.id.btnTrailer2);
-        btnTrailer2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // TODO: Play Youtube trailer
-                YouTubeTrailer(mTrailer2);
-            }
-        });
+//        Button btnTrailer1 = (Button) rootView.findViewById(R.id.btnTrailer1);
+//        btnTrailer1.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                // TODO: Play Youtube trailer
+//                YouTubeTrailer(mTrailer1);
+//            }
+//        });
+//
+//        Button btnTrailer2 = (Button) rootView.findViewById(R.id.btnTrailer2);
+//        btnTrailer2.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                // TODO: Play Youtube trailer
+//                YouTubeTrailer(mTrailer2);
+//            }
+//        });
 
         Button btnNext = (Button) rootView.findViewById(R.id.btnReviewNext);
         btnNext.setOnClickListener(new View.OnClickListener() {
@@ -296,36 +320,56 @@ public class MovieDetailFragment extends Fragment {
                     public void onResponse(JSONObject response) {
 
                         try {
+                            // Remove the contents
+//                            mYouTubeTrailers.clear();
+
                             // TODO: Make this a method
                             JSONObject videos = response.getJSONObject("videos");
                             JSONArray jsonArray = videos.getJSONArray("results");
 
-                            // TODO: Only take the top two videos
-                            // IF Videos are required
+                            // TODO: Allocate memory based on number of available trailers
 
+                            // IF Videos are required
+//
+                            // TODO: Change these variables to local
                             mTitle = response.getString("original_title");
                             mYear = response.getString("release_date");
                             mOverview = response.getString("overview");
                             mRuntime = response.getString("runtime") + " mins";
                             mThumbnail = MOVIE_IMAGE_URI + getScreenDensity() + response.getString("poster_path");
                             mRating = response.getString("vote_average") + "/10";
-
+//
                             for (int i=0; i<jsonArray.length(); i++) {
                                 JSONObject video = jsonArray.getJSONObject(i);
 
-                                switch(i) {
-                                    case 0:
-                                        mTrailer1 = WATCH_YOUTUBE + video.getString("key");
-                                        mTrailer1_name = video.getString("name");
-                                        break;
-                                    case 1:
-                                        mTrailer2 = WATCH_YOUTUBE + video.getString("key");
-                                        mTrailer2_name = video.getString("name");
-                                        break;
-                                    default:
-                                        break;
-                                }
+//                                switch(i) {
+//                                    case 0:
+//                                        mTrailer1 = WATCH_YOUTUBE + video.getString("key");
+//                                        mTrailer1_name = video.getString("name");
+//                                        break;
+//                                    case 1:
+//                                        mTrailer2 = WATCH_YOUTUBE + video.getString("key");
+//                                        mTrailer2_name = video.getString("name");
+//                                        break;
+//                                    default:
+//                                        break;
+//                                }
+
+                                // TODO: Local variable to hold the thumbnail value
+//                                String tempThumbnail;
+
+                                // TODO: Create a thumbnail reference
+//                                tempThumbnail = "http://img.youtube.com/vi/" + extractYouTubeId(video.getString("key")) + "/0.jpg";
+
+                                // TODO: Make an array list of trailer items
+
+                                mTrailerInformation.add(new Media(video.getString("key"),
+                                        "http://img.youtube.com/vi/" + video.getString("key") + "/0.jpg", video.getString("name"), 0));
                             }
+
+                            // TODO: Recyclerview create
+//                            mTrailerAdapter.notifyDataSetChanged();
+                            mTrailerRecyclerView.setAdapter(mTrailerAdapter);
 
                             // TODO: populate the detail fragment
                             populateMovieDetails();
@@ -345,6 +389,7 @@ public class MovieDetailFragment extends Fragment {
         // Queue the async request
         Volley.newRequestQueue(getActivity()).add(mJsonObjectRequest);
     }
+
 
 
     private void onRequestMovieReviews(String mID, int searchType) {
@@ -599,23 +644,23 @@ public class MovieDetailFragment extends Fragment {
         // TODO: Remove buttons and replace with RecyclerView
 
         // TODO: Only show the trailer buttons if videos found
-        Button btnTrailer1 = (Button) rootView.findViewById(R.id.btnTrailer1);
-        if (mTrailer1.length()==0) {
-            btnTrailer1.setText("Trailer-1");
-            btnTrailer1.setVisibility(View.INVISIBLE);
-        } else {
-            btnTrailer1.setText(mTrailer1_name);
-            btnTrailer1.setVisibility(View.VISIBLE);
-        }
-
-        Button btnTrailer2 = (Button) rootView.findViewById(R.id.btnTrailer2);
-        if (mTrailer2.length()==0) {
-            btnTrailer2.setText("Trailer-2");
-            btnTrailer2.setVisibility(View.INVISIBLE);
-        } else {
-            btnTrailer2.setText(mTrailer2_name);
-            btnTrailer2.setVisibility(View.VISIBLE);
-        }
+//        Button btnTrailer1 = (Button) rootView.findViewById(R.id.btnTrailer1);
+//        if (mTrailer1.length()==0) {
+//            btnTrailer1.setText("Trailer-1");
+//            btnTrailer1.setVisibility(View.INVISIBLE);
+//        } else {
+//            btnTrailer1.setText(mTrailer1_name);
+//            btnTrailer1.setVisibility(View.VISIBLE);
+//        }
+//
+//        Button btnTrailer2 = (Button) rootView.findViewById(R.id.btnTrailer2);
+//        if (mTrailer2.length()==0) {
+//            btnTrailer2.setText("Trailer-2");
+//            btnTrailer2.setVisibility(View.INVISIBLE);
+//        } else {
+//            btnTrailer2.setText(mTrailer2_name);
+//            btnTrailer2.setVisibility(View.VISIBLE);
+//        }
 
 
         /*
@@ -623,65 +668,46 @@ public class MovieDetailFragment extends Fragment {
          * Add a YouTube image
          */
 
-        if (mTrailer1.length()!=0) {
-            String strThumbnail;
-
-            try {
-                strThumbnail = extractYouTubeId(mTrailer1);
-
-                ImageView ivThumbnail = (ImageView) rootView.findViewById(R.id.YouTubeTrailer1);
-
-                // Load the thumbnail from Youtube
-                Picasso.with(getActivity())
-                        .load("http://img.youtube.com/vi/" + strThumbnail + "/0.jpg")
-                        .into(ivThumbnail);
-
-            }  catch (MalformedURLException ex) {
-                ex.printStackTrace();
-            }
-        }
-
-        if (mTrailer2.length()!=0) {
-            String strThumbnail2;
-
-            try {
-                strThumbnail2 = extractYouTubeId(mTrailer2);
-
-                ImageView ivThumbnail2 = (ImageView) rootView.findViewById(R.id.YouTubeTrailer2);
-
-                // Load the thumbnail from Youtube
-                Picasso.with(getActivity())
-                        .load("http://img.youtube.com/vi/" + strThumbnail2 + "/0.jpg")
-                        .into(ivThumbnail2);
-
-            } catch (MalformedURLException ex) {
-                ex.printStackTrace();
-            }
-
-        }
+//        if (mTrailer1.length()!=0) {
+//            String strThumbnail;
+//
+//            try {
+//                strThumbnail = extractYouTubeId(mTrailer1);
+//
+//                ImageView ivThumbnail = (ImageView) rootView.findViewById(R.id.YouTubeTrailer1);
+//
+//                // Load the thumbnail from Youtube
+//                Picasso.with(getActivity())
+//                        .load("http://img.youtube.com/vi/" + strThumbnail + "/0.jpg")
+//                        .into(ivThumbnail);
+//
+//            }  catch (MalformedURLException ex) {
+//                ex.printStackTrace();
+//            }
+//        }
+//
+//        if (mTrailer2.length()!=0) {
+//            String strThumbnail2;
+//
+//            try {
+//                strThumbnail2 = extractYouTubeId(mTrailer2);
+//
+//                ImageView ivThumbnail2 = (ImageView) rootView.findViewById(R.id.YouTubeTrailer2);
+//
+//                // Load the thumbnail from Youtube
+//                Picasso.with(getActivity())
+//                        .load("http://img.youtube.com/vi/" + strThumbnail2 + "/0.jpg")
+//                        .into(ivThumbnail2);
+//
+//            } catch (MalformedURLException ex) {
+//                ex.printStackTrace();
+//            }
+//
+//        }
 
     }
 
 
-    /*
-     * Utility function
-     * Name: extractYouTubeId
-     * Description: Get the id from the YouTube URI
-     *
-     */
-
-    public String extractYouTubeId(String url) throws MalformedURLException {
-        String query = new URL(url).getQuery();
-        String[] param = query.split("&");
-        String id = null;
-        for (String row : param) {
-            String[] param1 = row.split("=");
-            if (param1[0].equals("v")) {
-                id = param1[1];
-            }
-        }
-        return id;
-    }
 
 
 

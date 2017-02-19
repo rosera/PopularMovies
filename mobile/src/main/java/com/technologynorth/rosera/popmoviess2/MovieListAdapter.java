@@ -16,20 +16,20 @@ import java.util.ArrayList;
  * Created by rosera on 11/07/16.
  */
 
-public class MovieListAdapter extends ArrayAdapter<Poster> {
+public class MovieListAdapter extends ArrayAdapter<Media> {
 
     private static final String TAG_NAME = MovieListAdapter.class.getSimpleName();
 
-    Activity mActivity;
-    ArrayList<Poster> mPosters;
+    Activity            mActivity;
+    ArrayList<Media> mMedias;
 
     public MovieListAdapter(Activity context,
-                            ArrayList<Poster> Posters) {
+                            ArrayList<Media> media) {
 
-        super(context, 0, Posters) ;
+        super(context, 0, media) ;
 
         this.mActivity  = context;
-        this.mPosters   = Posters;
+        this.mMedias = media;
     }
 
     /*
@@ -45,12 +45,12 @@ public class MovieListAdapter extends ArrayAdapter<Poster> {
 
     @Override
     public int getCount() {
-        return mPosters.size();
+        return mMedias.size();
     }
 
     @Override
-    public Poster getItem(int position) {
-        return mPosters.get(position);
+    public Media getItem(int position) {
+        return mMedias.get(position);
     }
 
     @Override
@@ -94,13 +94,13 @@ public class MovieListAdapter extends ArrayAdapter<Poster> {
 
         // TODO: Use Picasso to fetch and load images into the ImageView
         Picasso.with(mActivity)
-                .load(mPosters.get(position).mThumbnail)
+                .load(mMedias.get(position).mThumbnail)
 //                .memoryPolicy(MemoryPolicy.NO_CACHE)
                 .into(filmViewHolder.mImageViewFilm);
 
-        filmViewHolder.mTextViewTitle.setText(mPosters.get(position).getTitle());
+        filmViewHolder.mTextViewTitle.setText(mMedias.get(position).getTitle());
 
-        filmViewHolder.mTextViewRating.setText("Rating: " + String.valueOf(mPosters.get(position).getRating()));
+        filmViewHolder.mTextViewRating.setText("Rating: " + String.valueOf(mMedias.get(position).getRating()));
 
         return view;
     }

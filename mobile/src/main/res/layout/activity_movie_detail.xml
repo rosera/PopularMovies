@@ -56,13 +56,14 @@
         android:paddingLeft="20dp"
         android:layout_marginTop="10dp"
         android:layout_marginLeft="0dp"
+        android:layout_marginBottom="100dp"
         android:paddingTop="5dp"
         android:paddingBottom="10dp"
-        android:maxHeight="175dp"
-        android:maxWidth="100dp"
+        android:maxHeight="225dp"
+        android:maxWidth="150dp"
         app:layout_anchor="@+id/movie_detail_container"
         app:layout_anchorGravity="top|start"
-        android:elevation="4dp"
+        android:elevation="6dp"
         android:adjustViewBounds="true"
         android:scaleType="fitXY" />
 
@@ -72,7 +73,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical|start"
         android:layout_margin="@dimen/fab_margin"
-        android:src="@android:drawable/stat_notify_chat"
+        android:src="@drawable/ic_star_border_56dp"
         app:layout_anchor="@+id/movie_detail_container"
         app:layout_anchorGravity="top|end"/>
 

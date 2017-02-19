@@ -46,9 +46,9 @@ public class MovieListActivity extends AppCompatActivity {
     private static final String API_KEY = BuildConfig.TMDB_API_KEY;
     private static final String SER_TOKEN = "SER_TOKEN";
 
-    private ArrayAdapter<Poster>    mMovieAdapter       = null;
+    private ArrayAdapter<Media>    mMovieAdapter       = null;
     private GridView                mGridView           = null;
-    private ArrayList<Poster>       mPosterInformation  = null;
+    private ArrayList<Media> mMediaInformation = null;
     private String                  mScreenDensity      = null;
 
 
@@ -72,47 +72,45 @@ public class MovieListActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         toolbar.setTitle(getTitle());
 
-        // Todo: Allocate memory for the film information
-        if (mPosterInformation == null) {
-            mPosterInformation = new ArrayList<>();
+        // Allocate memory for the film information
+        if (mMediaInformation == null) {
+            mMediaInformation = new ArrayList<>();
         }
 
-        // TODO: Add GridView
         // Get a reference to the ListView and attach the adapter to it
         mGridView = (GridView) findViewById(R.id.movie_list);
 
-        // TODO: Check network/internet status
+        // Check network/internet status
         if (getOnlineStatus()) {
 
-            // TODO: Check the screen density
+            // Check the screen density for a rough guide to image size
             getScreenDensity();
 
-            // TODO: Call sort setting before making the API request
+            // Toggle sort setting before making the API request
             setSortMovieAPI(mSortOrderPref);
 
-            // TODO: Call to populate the film information
+            // Call to populate the film information
             onRequestMovieAPI();
         }
         else {
             // No network connection currently available
-//            Toast.makeText(getActivity(),
             Toast.makeText(getApplicationContext(),
                     "Please check your network connection", Toast.LENGTH_SHORT).show();
         }
 
-        // Todo: Populate the adapter by instantiating the custom adapter
-        mMovieAdapter = new MovieListAdapter(this, mPosterInformation);
+        // Populate the adapter by instantiating the custom adapter
+        mMovieAdapter = new MovieListAdapter(this, mMediaInformation);
 
-        // Todo: Set the listViewMovies content to the adapter
+        // Set the listViewMovies content to the adapter
         mGridView.setAdapter((mMovieAdapter));
 
-        // Todo: Add an onItemClick method to display the movie details
+        // Add an onItemClick method to display the movie details
         mGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                // TODO: Pass the selected film information
-                Poster myFilm = mPosterInformation.get(position);
+                // Pass the selected film information
+                Media myFilm = mMediaInformation.get(position);
 
                 if (mTwoPane) {
                     Bundle arguments = new Bundle();
@@ -123,7 +121,7 @@ public class MovieListActivity extends AppCompatActivity {
                             .replace(R.id.movie_detail_container, fragment)
                             .commit();
                 } else {
-                    // TODO: Call new activity for the details screen
+                    // Call new activity for the details screen
                     Intent intent = new Intent(getApplicationContext(), MovieDetailActivity.class)
                             .putExtra("URI", myFilm.getThumbnail())
                             .putExtra("ID", myFilm.getID());
@@ -132,11 +130,6 @@ public class MovieListActivity extends AppCompatActivity {
                 }
             }
         });
-
-
-//        View recyclerView = findViewById(R.id.movie_list);
-//        assert recyclerView != null;
-//        setupRecyclerView((RecyclerView) recyclerView);
 
         if (findViewById(R.id.movie_detail_container) != null) {
             // The detail container view will be present only in the
@@ -159,17 +152,21 @@ public class MovieListActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.most_popular:
                 setSortMovieAPI(false);
+
+                // Call to populate the film information
+                onRequestMovieAPI();
                 return true;
 
             case R.id.highest_rated:
                 setSortMovieAPI(true);
+
+                // Call to populate the film information
+                onRequestMovieAPI();
                 return true;
 
             default:
                 break;
         }
-
-        // TODO: Dont forget to store the state
 
         return super.onOptionsItemSelected(item);
     }
@@ -186,8 +183,8 @@ public class MovieListActivity extends AppCompatActivity {
      */
 
     public boolean getOnlineStatus() {
-//        ConnectivityManager connMgr = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
-        ConnectivityManager connMgr = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        ConnectivityManager connMgr = (ConnectivityManager)
+                getSystemService(Context.CONNECTIVITY_SERVICE);
 
         NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
         return (networkInfo != null && networkInfo.isConnected());
@@ -202,7 +199,6 @@ public class MovieListActivity extends AppCompatActivity {
 
     public void getScreenDensity() {
         DisplayMetrics metrics = new DisplayMetrics();
-//        getActivity().getWindowManager().getDefaultDisplay().getMetrics(metrics);
         getWindowManager().getDefaultDisplay().getMetrics(metrics);
 
         int density = metrics.densityDpi;
@@ -219,10 +215,9 @@ public class MovieListActivity extends AppCompatActivity {
 
     public void setSortMovieAPI(boolean sortFlag) {
 
-        int sortMovieAPI;
-
         // TODO: Refactor this method
-        // to use boolean rather than int
+
+        int sortMovieAPI;
 
         if (!sortFlag) {
             sortMovieAPI = 0;
@@ -232,45 +227,37 @@ public class MovieListActivity extends AppCompatActivity {
 
         switch(sortMovieAPI) {
 
-            // TODO: sort_by=popularity.desc
-            // TODO: sort_by=vote_average.desc
-
-            // TODO: Update method to remove two sort order variables
-
             case 0:
-//                mSortOrder = "sort_by=popularity.desc";
+
                 mSortOrder = "popular";
                 mSortOrderPref = false;
-                // TODO: Check network/internet status
-                if (getOnlineStatus()) {
-                    // TODO: Call to populate the film information
-                    onRequestMovieAPI();
-                }
-                else {
-                    // No network connection currently available
-//                    Toast.makeText(getActivity(),
-                    Toast.makeText(getApplicationContext(),
-                            "Please check your network connection", Toast.LENGTH_SHORT).show();
-                }
+//                // TODO: Check network/internet status
+//                if (getOnlineStatus()) {
+//                    // TODO: Call to populate the film information
+//                    onRequestMovieAPI();
+//                }
+//                else {
+//                    // No network connection currently available
+//                    Toast.makeText(getApplicationContext(),
+//                            "Please check your network connection", Toast.LENGTH_SHORT).show();
+//                }
                 break;
 
             case 1:
-//                mSortOrder = "sort_by=vote_average.desc";
-//                mSortOrder = "sort_by=top_rated.desc";
+
                 mSortOrder = "top_rated";
                 mSortOrderPref = true;
 
-                // TODO: Check network/internet status
-                if (getOnlineStatus()) {
-                    // TODO: Call to populate the film information
-                    onRequestMovieAPI();
-                }
-                else {
-                    // No network connection currently available
-//                    Toast.makeText(getActivity(),
-                    Toast.makeText(getApplicationContext(),
-                            "Please check your network connection", Toast.LENGTH_SHORT).show();
-                }
+//                // TODO: Check network/internet status
+//                if (getOnlineStatus()) {
+//                    // TODO: Call to populate the film information
+//                    onRequestMovieAPI();
+//                }
+//                else {
+//                    // No network connection currently available
+//                    Toast.makeText(getApplicationContext(),
+//                            "Please check your network connection", Toast.LENGTH_SHORT).show();
+//                }
 
                 break;
             default:
@@ -318,7 +305,7 @@ public class MovieListActivity extends AppCompatActivity {
                             String poster_uri;
 
                             // TODO: Clear existing information
-                            mPosterInformation.clear();
+                            mMediaInformation.clear();
 
                             // TODO: Loop through the array
                             for (int i=0; i < jsonArray.length(); i++) {
@@ -332,7 +319,7 @@ public class MovieListActivity extends AppCompatActivity {
                                 poster_uri = movie.getString("poster_path");
 
                                 // TODO: Add to movie structure
-                                mPosterInformation.add(new Poster(id,
+                                mMediaInformation.add(new Media(id,
                                         MOVIE_IMAGE_URI+mScreenDensity+poster_uri, title, rating));
                             }
 

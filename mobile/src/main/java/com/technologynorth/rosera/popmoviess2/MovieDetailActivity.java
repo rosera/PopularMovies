@@ -47,7 +47,8 @@ public class MovieDetailActivity extends AppCompatActivity {
 
         // Add a scrollable poster
         ImageView imageViewBackdrop = (ImageView) findViewById(R.id.toolbar_image);
-        // TODO: Use Picasso to fetch and load images into the ImageView
+
+        // Use Picasso to fetch and load images into the ImageView
         Picasso.with(this)
                 .load(mThumbnail)
                 .into(imageViewBackdrop);

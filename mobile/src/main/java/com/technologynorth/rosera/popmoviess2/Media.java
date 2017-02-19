@@ -6,9 +6,9 @@ import android.os.Parcelable;
 /**
  * Created by rosera on 11/07/16.
  */
-public class Poster implements Parcelable {
+public class Media implements Parcelable {
     // Debug TAG
-    private static final String TAG_NAME = Poster.class.getSimpleName();
+    private static final String TAG_NAME = Media.class.getSimpleName();
 
     // TODO: Add member variables
     String mID;
@@ -18,10 +18,10 @@ public class Poster implements Parcelable {
 
 
     /*
-     * Name: Poster
+     * Name: Media
      * Comment: Constructor
      */
-    public Poster(String strID, String strThumbnail, String strTitle, double dRating) {
+    public Media(String strID, String strThumbnail, String strTitle, double dRating) {
         this.mID            = strID;
         this.mThumbnail     = strThumbnail;
         this.mTitle         = strTitle;
@@ -51,7 +51,7 @@ public class Poster implements Parcelable {
 
 
     // TODO: Add parcelable methods
-    private Poster(Parcel in) {
+    private Media(Parcel in) {
         this.mID                = in.readString();
         this.mThumbnail         = in.readString();
         this.mTitle             = in.readString();
@@ -74,15 +74,15 @@ public class Poster implements Parcelable {
         dest.writeDouble(this.mRating);
     }
 
-    public final Parcelable.Creator<Poster> CREATOR = new Parcelable.Creator<Poster>() {
+    public final Parcelable.Creator<Media> CREATOR = new Parcelable.Creator<Media>() {
         @Override
-        public Poster createFromParcel(Parcel parcel) {
-            return new Poster(parcel);
+        public Media createFromParcel(Parcel parcel) {
+            return new Media(parcel);
         }
 
         @Override
-        public Poster[] newArray(int i) {
-            return new Poster[i];
+        public Media[] newArray(int i) {
+            return new Media[i];
         }
     };
 }
