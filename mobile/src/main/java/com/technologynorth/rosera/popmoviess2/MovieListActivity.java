@@ -46,11 +46,10 @@ public class MovieListActivity extends AppCompatActivity {
     private static final String API_KEY = BuildConfig.TMDB_API_KEY;
     private static final String SER_TOKEN = "SER_TOKEN";
 
-    private ArrayAdapter<Media>    mMovieAdapter       = null;
-    private GridView                mGridView           = null;
-    private ArrayList<Media> mMediaInformation = null;
-    private String                  mScreenDensity      = null;
-
+    private ArrayAdapter<Media> mMovieAdapter       = null;
+    private GridView            mGridView           = null;
+    private ArrayList<Media>    mMediaInformation   = null;
+    private String              mScreenDensity      = null;
 
     // TODO: Refactor flags / Save the sort preference in saveInstanceState
     private String                  mSortOrder          = "popular";

@@ -61,7 +61,9 @@ public class MovieDetailFragment extends Fragment {
     private ArrayList<Media> mSimilarInformation    = null;
 
     private MediaListAdapter    mTrailerAdapter = null;
+    private MediaListAdapter    mSimilarAdapter = null;
     private RecyclerView        mTrailerRecyclerView = null;
+    private RecyclerView        mSimilarRecyclerView = null;
 
     // TODO: Do this initialisation in a method
     private String mID          = "";
@@ -135,12 +137,13 @@ public class MovieDetailFragment extends Fragment {
         if (mFilmInformation == null)
             mFilmInformation = new ArrayList<>();
 
+        // Allocate memory for the trailer thumbnail
         if (mTrailerInformation == null)
             mTrailerInformation = new ArrayList<Media>();
 
+        // Allocate memory for the similar movies thumbnail
         if (mSimilarInformation == null)
             mSimilarInformation = new ArrayList<Media>();
-
 
     }
 
@@ -150,26 +153,33 @@ public class MovieDetailFragment extends Fragment {
 
         rootView = inflater.inflate(R.layout.movie_detail, container, false);
 
-        // TODO: Horizontal RecyclerView - Trailers from YouTube
-        mTrailerRecyclerView = (RecyclerView) rootView.findViewById(R.id.YouTubeTrailer);
-
-        LinearLayoutManager linearLayoutManager =
+        // Set the layout as a horizontal layout
+        LinearLayoutManager linearTrailerLayoutManager =
+                new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
+        LinearLayoutManager linearSimilarLayoutManager =
                 new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL, false);
 
-        mTrailerRecyclerView.setLayoutManager(linearLayoutManager);
+        // TODO: Horizontal RecyclerView - Trailers from YouTube
+        mTrailerRecyclerView = (RecyclerView) rootView.findViewById(R.id.YouTubeTrailer);
+        mTrailerRecyclerView.setLayoutManager(linearTrailerLayoutManager);
 
-        // TODO: Need recycler adapter
+        // TODO: Horizontal RecyclerView - Similar Movies list
+        mSimilarRecyclerView = (RecyclerView) rootView.findViewById(R.id.SimilarMovies);
+        mSimilarRecyclerView.setLayoutManager(linearSimilarLayoutManager);
+
+        // TODO: Need recycler adapter - Trailers
         mTrailerAdapter = new MediaListAdapter(mTrailerInformation,
                                     R.layout.recycler_media_item,
                                     getActivity());
 
-//        mTrailerRecyclerView.setAdapter(mTrailerAdapter);
+        // TODO: Need recycler adapter - Similar Movies
+        mSimilarAdapter = new MediaListAdapter(mSimilarInformation,
+                R.layout.recycler_media_item,
+                getActivity());
+
 
 
         // TODO: Add a listener to the RecyclerView
-
-        // TODO Horizontal RecyclerView - Similar moves list
-
 
 
         // TODO: Add listener for buttons
@@ -561,33 +571,46 @@ public class MovieDetailFragment extends Fragment {
                             for (int i=0; i<jsonArray.length(); i++) {
                                 JSONObject video = jsonArray.getJSONObject(i);
 
-                                switch(i) {
-                                    case 0:
-                                        mMinPoster1 = MOVIE_IMAGE_URI + "w185" + video.getString("poster_path");
-                                        mMinPoster1_title = video.getString("title");
-                                        mMinID1 = video.getString("id");
-                                        break;
-                                    case 1:
-                                        mMinPoster2 = MOVIE_IMAGE_URI + "w185" + video.getString("poster_path");
-                                        mMinPoster2_title = video.getString("title");
-                                        mMinID2 = video.getString("id");
-                                        break;
+//                                switch(i) {
+//                                    case 0:
+//                                        mMinPoster1 = MOVIE_IMAGE_URI + "w185" + video.getString("poster_path");
+//                                        mMinPoster1_title = video.getString("title");
+//                                        mMinID1 = video.getString("id");
+//                                        break;
+//                                    case 1:
+//                                        mMinPoster2 = MOVIE_IMAGE_URI + "w185" + video.getString("poster_path");
+//                                        mMinPoster2_title = video.getString("title");
+//                                        mMinID2 = video.getString("id");
+//                                        break;
+//
+//                                    case 2:
+//                                        mMinPoster3 = MOVIE_IMAGE_URI + "w185" + video.getString("poster_path");
+//                                        mMinPoster3_title = video.getString("title");
+//                                        mMinID3 = video.getString("id");
+//                                        break;
+//
+//                                    case 3:
+//                                        mMinPoster4 = MOVIE_IMAGE_URI + "w185" + video.getString("poster_path");
+//                                        mMinPoster4_title = video.getString("title");
+//                                        mMinID4 = video.getString("id");
+//                                        break;
+//                                    default:
+//                                        break;
+//                                }
 
-                                    case 2:
-                                        mMinPoster3 = MOVIE_IMAGE_URI + "w185" + video.getString("poster_path");
-                                        mMinPoster3_title = video.getString("title");
-                                        mMinID3 = video.getString("id");
-                                        break;
+                                // TODO: Local variable to hold the thumbnail value
+//                                String tempThumbnail;
 
-                                    case 3:
-                                        mMinPoster4 = MOVIE_IMAGE_URI + "w185" + video.getString("poster_path");
-                                        mMinPoster4_title = video.getString("title");
-                                        mMinID4 = video.getString("id");
-                                        break;
-                                    default:
-                                        break;
-                                }
+                                // TODO: Create a thumbnail reference
+//                                tempThumbnail = "http://img.youtube.com/vi/" + extractYouTubeId(video.getString("key")) + "/0.jpg";
+
+                                // TODO: Make an array list of similar movie items
+                                mSimilarInformation.add(new Media(video.getString("id"),
+                                        MOVIE_IMAGE_URI + "w185" + video.getString("poster_path"), video.getString("title"), 0));
                             }
+
+                            // TODO: Recyclerview create
+                            mSimilarRecyclerView.setAdapter(mSimilarAdapter);
 
                             // TODO: populate the detail fragment
                             populateSimilarDetails();

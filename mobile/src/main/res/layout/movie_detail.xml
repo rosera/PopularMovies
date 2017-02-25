@@ -203,13 +203,20 @@
                 android:textStyle="bold"
                 android:paddingRight="5dp"/>
 
+            <android.support.v7.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/SimilarMovies"
+                android:layout_below="@+id/tvHeader2"
+                android:layout_alignParentStart="true" />
+
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/imageViewMinPoster1"
                 android:minHeight="100dp"
                 android:minWidth="35dp"
-                android:layout_below="@id/tvHeader2"
+                android:layout_below="@id/SimilarMovies"
                 android:paddingLeft="5dp"/>
 
             <ImageView
@@ -218,7 +225,7 @@
                 android:id="@+id/imageViewMinPoster2"
                 android:minHeight="100dp"
                 android:minWidth="35dp"
-                android:layout_below="@id/tvHeader2"
+                android:layout_below="@id/SimilarMovies"
                 android:layout_toRightOf="@id/imageViewMinPoster1"
                 android:paddingLeft="20dp"/>
 
@@ -228,7 +235,7 @@
                 android:id="@+id/imageViewMinPoster3"
                 android:minHeight="100dp"
                 android:minWidth="35dp"
-                android:layout_below="@id/tvHeader2"
+                android:layout_below="@id/SimilarMovies"
                 android:layout_toRightOf="@id/imageViewMinPoster2"
                 android:paddingLeft="20dp"/>
 
@@ -238,7 +245,7 @@
                 android:id="@+id/imageViewMinPoster4"
                 android:minHeight="100dp"
                 android:minWidth="35dp"
-                android:layout_below="@id/tvHeader2"
+                android:layout_below="@id/SimilarMovies"
                 android:layout_toRightOf="@id/imageViewMinPoster3"
                 android:paddingLeft="20dp"/>
 
