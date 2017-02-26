@@ -178,28 +178,32 @@ public class MovieDetailFragment extends Fragment {
                 getActivity());
 
 
+        // TODO: Add code to expand/contract review text
+        final TextView tvReview = (TextView) rootView.findViewById(R.id.tvReview);
+        final Button btnShow = (Button) rootView.findViewById(R.id.btnMore);
+        final Button btnHide = (Button) rootView.findViewById(R.id.btnLess);
+
+        btnShow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                btnShow.setVisibility(View.INVISIBLE);
+                btnHide.setVisibility(View.VISIBLE);
+                tvReview.setMaxLines(Integer.MAX_VALUE);
+            }
+        });
+
+        btnHide.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                btnHide.setVisibility(View.INVISIBLE);
+                btnShow.setVisibility(View.VISIBLE);
+                tvReview.setMaxLines(5);
+            }
+        });
+
 
         // TODO: Add a listener to the RecyclerView
 
-
-        // TODO: Add listener for buttons
-//        Button btnTrailer1 = (Button) rootView.findViewById(R.id.btnTrailer1);
-//        btnTrailer1.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                // TODO: Play Youtube trailer
-//                YouTubeTrailer(mTrailer1);
-//            }
-//        });
-//
-//        Button btnTrailer2 = (Button) rootView.findViewById(R.id.btnTrailer2);
-//        btnTrailer2.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                // TODO: Play Youtube trailer
-//                YouTubeTrailer(mTrailer2);
-//            }
-//        });
 
         Button btnNext = (Button) rootView.findViewById(R.id.btnReviewNext);
         btnNext.setOnClickListener(new View.OnClickListener() {
@@ -352,33 +356,12 @@ public class MovieDetailFragment extends Fragment {
                             for (int i=0; i<jsonArray.length(); i++) {
                                 JSONObject video = jsonArray.getJSONObject(i);
 
-//                                switch(i) {
-//                                    case 0:
-//                                        mTrailer1 = WATCH_YOUTUBE + video.getString("key");
-//                                        mTrailer1_name = video.getString("name");
-//                                        break;
-//                                    case 1:
-//                                        mTrailer2 = WATCH_YOUTUBE + video.getString("key");
-//                                        mTrailer2_name = video.getString("name");
-//                                        break;
-//                                    default:
-//                                        break;
-//                                }
-
-                                // TODO: Local variable to hold the thumbnail value
-//                                String tempThumbnail;
-
-                                // TODO: Create a thumbnail reference
-//                                tempThumbnail = "http://img.youtube.com/vi/" + extractYouTubeId(video.getString("key")) + "/0.jpg";
-
                                 // TODO: Make an array list of trailer items
-
                                 mTrailerInformation.add(new Media(video.getString("key"),
                                         "http://img.youtube.com/vi/" + video.getString("key") + "/0.jpg", video.getString("name"), 0));
                             }
 
                             // TODO: Recyclerview create
-//                            mTrailerAdapter.notifyDataSetChanged();
                             mTrailerRecyclerView.setAdapter(mTrailerAdapter);
 
                             // TODO: populate the detail fragment
@@ -571,39 +554,6 @@ public class MovieDetailFragment extends Fragment {
                             for (int i=0; i<jsonArray.length(); i++) {
                                 JSONObject video = jsonArray.getJSONObject(i);
 
-//                                switch(i) {
-//                                    case 0:
-//                                        mMinPoster1 = MOVIE_IMAGE_URI + "w185" + video.getString("poster_path");
-//                                        mMinPoster1_title = video.getString("title");
-//                                        mMinID1 = video.getString("id");
-//                                        break;
-//                                    case 1:
-//                                        mMinPoster2 = MOVIE_IMAGE_URI + "w185" + video.getString("poster_path");
-//                                        mMinPoster2_title = video.getString("title");
-//                                        mMinID2 = video.getString("id");
-//                                        break;
-//
-//                                    case 2:
-//                                        mMinPoster3 = MOVIE_IMAGE_URI + "w185" + video.getString("poster_path");
-//                                        mMinPoster3_title = video.getString("title");
-//                                        mMinID3 = video.getString("id");
-//                                        break;
-//
-//                                    case 3:
-//                                        mMinPoster4 = MOVIE_IMAGE_URI + "w185" + video.getString("poster_path");
-//                                        mMinPoster4_title = video.getString("title");
-//                                        mMinID4 = video.getString("id");
-//                                        break;
-//                                    default:
-//                                        break;
-//                                }
-
-                                // TODO: Local variable to hold the thumbnail value
-//                                String tempThumbnail;
-
-                                // TODO: Create a thumbnail reference
-//                                tempThumbnail = "http://img.youtube.com/vi/" + extractYouTubeId(video.getString("key")) + "/0.jpg";
-
                                 // TODO: Make an array list of similar movie items
                                 mSimilarInformation.add(new Media(video.getString("id"),
                                         MOVIE_IMAGE_URI + "w185" + video.getString("poster_path"), video.getString("title"), 0));
@@ -613,7 +563,7 @@ public class MovieDetailFragment extends Fragment {
                             mSimilarRecyclerView.setAdapter(mSimilarAdapter);
 
                             // TODO: populate the detail fragment
-                            populateSimilarDetails();
+//                            populateSimilarDetails();
 
                         } catch (JSONException ex) {
                             ex.printStackTrace();
@@ -638,16 +588,6 @@ public class MovieDetailFragment extends Fragment {
      */
     private void populateMovieDetails() {
 
-//        if (rootView == null) {
-//            rootView = this.getView();
-//        }
-
-//        ImageView imageViewThumbnail = (ImageView) rootView.findViewById(R.id.imageViewPoster);
-//        // TODO: Use Picasso to fetch and load images into the ImageView
-//        Picasso.with(getActivity())
-//                .load(mThumbnail)
-//                .into(imageViewThumbnail);
-
         // TODO: Get reference to the UI controls
         TextView tvTitle = (TextView) rootView.findViewById(R.id.textViewTitle);
         tvTitle.setText(mTitle);
@@ -663,71 +603,6 @@ public class MovieDetailFragment extends Fragment {
 
         TextView tvRuntime = (TextView) rootView.findViewById(R.id.tvRuntime);
         tvRuntime.setText(mRuntime);
-
-        // TODO: Remove buttons and replace with RecyclerView
-
-        // TODO: Only show the trailer buttons if videos found
-//        Button btnTrailer1 = (Button) rootView.findViewById(R.id.btnTrailer1);
-//        if (mTrailer1.length()==0) {
-//            btnTrailer1.setText("Trailer-1");
-//            btnTrailer1.setVisibility(View.INVISIBLE);
-//        } else {
-//            btnTrailer1.setText(mTrailer1_name);
-//            btnTrailer1.setVisibility(View.VISIBLE);
-//        }
-//
-//        Button btnTrailer2 = (Button) rootView.findViewById(R.id.btnTrailer2);
-//        if (mTrailer2.length()==0) {
-//            btnTrailer2.setText("Trailer-2");
-//            btnTrailer2.setVisibility(View.INVISIBLE);
-//        } else {
-//            btnTrailer2.setText(mTrailer2_name);
-//            btnTrailer2.setVisibility(View.VISIBLE);
-//        }
-
-
-        /*
-         * TODO: Interface change add YouTube images (Recycler) rather than buttons
-         * Add a YouTube image
-         */
-
-//        if (mTrailer1.length()!=0) {
-//            String strThumbnail;
-//
-//            try {
-//                strThumbnail = extractYouTubeId(mTrailer1);
-//
-//                ImageView ivThumbnail = (ImageView) rootView.findViewById(R.id.YouTubeTrailer1);
-//
-//                // Load the thumbnail from Youtube
-//                Picasso.with(getActivity())
-//                        .load("http://img.youtube.com/vi/" + strThumbnail + "/0.jpg")
-//                        .into(ivThumbnail);
-//
-//            }  catch (MalformedURLException ex) {
-//                ex.printStackTrace();
-//            }
-//        }
-//
-//        if (mTrailer2.length()!=0) {
-//            String strThumbnail2;
-//
-//            try {
-//                strThumbnail2 = extractYouTubeId(mTrailer2);
-//
-//                ImageView ivThumbnail2 = (ImageView) rootView.findViewById(R.id.YouTubeTrailer2);
-//
-//                // Load the thumbnail from Youtube
-//                Picasso.with(getActivity())
-//                        .load("http://img.youtube.com/vi/" + strThumbnail2 + "/0.jpg")
-//                        .into(ivThumbnail2);
-//
-//            } catch (MalformedURLException ex) {
-//                ex.printStackTrace();
-//            }
-//
-//        }
-
     }
 
 
@@ -847,33 +722,33 @@ public class MovieDetailFragment extends Fragment {
 
     public void populateSimilarDetails() {
         // TODO: Use Picasso to fetch and load images into the ImageView
-        if (mMinPoster1.length() > 0) {
-            ImageView imageViewPoster1 = (ImageView) rootView.findViewById(R.id.imageViewMinPoster1);
-            Picasso.with(getActivity())
-                    .load(mMinPoster1)
-                    .into(imageViewPoster1);
-        }
-
-        if (mMinPoster2.length() > 0) {
-            ImageView imageViewPoster2 = (ImageView) rootView.findViewById(R.id.imageViewMinPoster2);
-            Picasso.with(getActivity())
-                    .load(mMinPoster2)
-                    .into(imageViewPoster2);
-        }
-
-        if (mMinPoster3.length() > 0) {
-            ImageView imageViewPoster3 = (ImageView) rootView.findViewById(R.id.imageViewMinPoster3);
-            Picasso.with(getActivity())
-                    .load(mMinPoster3)
-                    .into(imageViewPoster3);
-        }
-
-        if (mMinPoster4.length() > 0) {
-            ImageView imageViewPoster4 = (ImageView) rootView.findViewById(R.id.imageViewMinPoster4);
-            Picasso.with(getActivity())
-                    .load(mMinPoster4)
-                    .into(imageViewPoster4);
-        }
+//        if (mMinPoster1.length() > 0) {
+//            ImageView imageViewPoster1 = (ImageView) rootView.findViewById(R.id.imageViewMinPoster1);
+//            Picasso.with(getActivity())
+//                    .load(mMinPoster1)
+//                    .into(imageViewPoster1);
+//        }
+//
+//        if (mMinPoster2.length() > 0) {
+//            ImageView imageViewPoster2 = (ImageView) rootView.findViewById(R.id.imageViewMinPoster2);
+//            Picasso.with(getActivity())
+//                    .load(mMinPoster2)
+//                    .into(imageViewPoster2);
+//        }
+//
+//        if (mMinPoster3.length() > 0) {
+//            ImageView imageViewPoster3 = (ImageView) rootView.findViewById(R.id.imageViewMinPoster3);
+//            Picasso.with(getActivity())
+//                    .load(mMinPoster3)
+//                    .into(imageViewPoster3);
+//        }
+//
+//        if (mMinPoster4.length() > 0) {
+//            ImageView imageViewPoster4 = (ImageView) rootView.findViewById(R.id.imageViewMinPoster4);
+//            Picasso.with(getActivity())
+//                    .load(mMinPoster4)
+//                    .into(imageViewPoster4);
+//        }
 
 
 
