@@ -38,7 +38,7 @@ A valid TMDB API key can be accessed via the TMDB website.
 4. Start Android Studio
 5. Import the PopularMovies project
 6. Create/Amend a new gradle file - gradle.properties
-7. Edit gradle.properties and add TMDB_API_KEY="Enter Your valid API KEY" 
+7. Edit gradle.properties and add TMDB_API_KEY="Enter Your valid API KEY" (Note: if you dont already have a valid TMDB API key, sign up at https://developers.themoviedb.org/3/getting-started).
 
 ![Popular Movies phone application](images/gradle-properties-screenshot.png?raw=true "Gradle Properties")
 
