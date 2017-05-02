@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    tools:context="com.technologynorth.rosera.popmoviess2.MovieDetailFragment"
+    android:id="@+id/card_media"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp"
+    card_view:cardElevation="6dp"
+    card_view:cardCornerRadius="4dp"
+    android:nestedScrollingEnabled="false">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageViewMedia"
+            android:contentDescription="@string/film_poster"
+            android:maxWidth="185dp"
+
+            android:scaleType="fitXY"
+            android:adjustViewBounds="true" />
+
+        <TextView
+            android:text="TextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/imageViewMedia"
+            android:id="@+id/textViewTitle"
+            android:maxLines="1"
+            android:maxWidth="125dp"
+            android:textSize="10dp"
+            android:textStyle="bold"
+            android:ellipsize="end"
+            android:paddingTop="5dp"
+            android:paddingLeft="5dp"
+            android:paddingBottom="5dp"/>
+
+    </RelativeLayout>
+</android.support.v7.widget.CardView><?xml version="1.0" encoding="utf-8"?>
